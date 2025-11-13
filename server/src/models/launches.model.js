@@ -8,7 +8,7 @@ const launch = {
     rocket: "Explorer IS1",
     launchDate: new Date("December 27, 2030"),
     target: "Kepler-442 b",
-    customer: ["NASA", "ZFT"],
+    customers: ["NASA", "ZFT"],
     upcoming: true,
     success: true
 }
@@ -23,14 +23,27 @@ function addNewLaunch(launch){
     latestFlightNumber++
     launches.set(latestFlightNumber, Object.assign(launch, {
         flightNumber: latestFlightNumber,
-        customer: ['NASA'],
+        customers: ['NASA'],
         upcoming: true,
         success: true,
         
     }))
 }
 
+function existsLaunchWithId(launchId){
+    return launches.has(launchId)
+}
+
+function abortLaunchbyId(launchId){
+    const aborted = launches.get(launchId)
+    aborted.upcoming = false
+    aborted.success = false
+    return aborted
+}
+
 module.exports = {
     getAllLaunches,
-    addNewLaunch
+    addNewLaunch,
+    existsLaunchWithId,
+    abortLaunchbyId
 }

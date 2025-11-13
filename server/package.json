@@ -4,7 +4,8 @@
   "description": "planets-app Control Api",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test-watch": "test --watch",
     "watch": "nodemon --env-file ./.env src/server.js",
     "start": "node src/server.js"
   },
@@ -19,6 +20,8 @@
     "morgan": "^1.10.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
   }
 }

@@ -1,16 +1,15 @@
-
 const request = require("supertest");
 const app = require("../src/app");
 const { mongoConnect, mongoDisconnect } = require("../src/services/mongo");
 
 describe("Launches API", () => {
-  beforeAll( async () => {
-    await mongoConnect()
-  })
+  beforeAll(async () => {
+    await mongoConnect();
+  });
 
   afterAll(async () => {
-    await mongoDisconnect()
-  })
+    await mongoDisconnect();
+  });
 
   describe("Test GET /launches", () => {
     test("It should respond with 200 success", async () => {
@@ -21,22 +20,22 @@ describe("Launches API", () => {
     });
   });
 
-  describe("Test POSt /launch", () => {
+  describe("Test POST /launch", () => {
     const completeLaunchData = {
-      mission: "USR Enterprise",
+      mission: "USR Enterpriser",
       rocket: "NCZ F2-3C",
-      target: "Kepler-442 f",
+      target: "Kepler-62 f",
       launchDate: "March 12, 2034",
     };
 
     const launchDataWithoutDate = {
-      mission: "USR Enterprise",
+      mission: "USR Enterpriser",
       rocket: "NCZ F2-3C",
       target: "Kepler-62 f",
     };
 
     const lanchDataWithInvalidDate = {
-      mission: "USR Enterprise",
+      mission: "USR Enterpriser",
       rocket: "NCZ F2-3C",
       target: "Kepler-62 f",
       launchDate: "asdf",
@@ -45,8 +44,8 @@ describe("Launches API", () => {
     test("It shouls rspond with 201 success", async () => {
       const response = await request(app)
         .post("/launches")
+        .set("Content-Type", "application/json")
         .send(completeLaunchData)
-        .set('Accept','application/json')
         .expect("Content-Type", /json/)
         .expect(201);
 

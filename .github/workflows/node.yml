@@ -9,6 +9,7 @@ jobs:
     env:
       CI: true
       MONGO_URL: mongodb://localhost:/nasa-mongodb
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
     strategy:
       matrix:
         node-version: [24.x]
@@ -27,5 +28,3 @@ jobs:
       - run: npm install
       - run: npm run build --prefix client
       - run: npm test
-      env:
-        MONGODB_URI: ${{ secrets.MONDODB_URI }}
